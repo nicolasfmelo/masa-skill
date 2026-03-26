@@ -2,6 +2,8 @@
 
 > Teach your AI coding agent the **Modular Agentic Semantic Architecture** (MASA) — a framework that maximizes how well agents can understand, navigate, and safely modify your codebase.
 
+📄 **Read the full study:** [www.masa-framework.org](https://www.masa-framework.org/)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## What Is This?
