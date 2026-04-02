@@ -1,0 +1,21 @@
+{
+  "name": "masa-skill",
+  "owner": {
+    "name": "Eduardo Machado Rezende"
+  },
+  "metadata": {
+    "description": "MASA framework plugin for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "masa",
+      "source": "./",
+      "description": "Teach your AI coding agent the MASA (Modular Agentic Semantic Architecture) framework",
+      "version": "1.0.0",
+      "homepage": "https://www.masa-framework.org/",
+      "license": "MIT",
+      "keywords": ["architecture", "masa", "agent-first", "code-quality"],
+      "category": "code-quality"
+    }
+  ]
+}
