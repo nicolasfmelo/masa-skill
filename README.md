@@ -42,9 +42,57 @@ cp SKILL.md your-project/SKILL.md
 
 > **Tip:** For VS Code, you can also add it to your workspace settings under `github.copilot.chat.codeGeneration.instructions`.
 
-### Claude Code (Anthropic)
+### Claude Code (Plugin)
 
-Add the skill as project instructions:
+Install as a Claude Code plugin for the best experience — includes slash commands and auto-invoked skills:
+
+```bash
+# Install from the official Claude Code marketplace (in review)
+/plugin install masa
+
+# Or add from the GitHub marketplace manually
+/plugin marketplace add nicolasfmelo/masa-skill
+/plugin install masa@masa-skill
+```
+
+Once installed, you get these slash commands:
+
+| Command | What It Does |
+|---------|-------------|
+| `/masa:new-feature [description]` | Walk through the 5-step protocol for a new feature |
+| `/masa:validate` | Audit current code for MASA compliance |
+| `/masa:audit [layer]` | Full audit of a layer's imports, naming, and compliance |
+| `/masa:refactor` | Propose a MASA-compliant refactoring |
+| `/masa:explain [rule]` | Explain a ruleset with language-specific examples |
+| `/masa:scaffold [language]` | Generate the full MASA directory skeleton |
+
+Plus, the **masa-framework** skill is auto-invoked by Claude when it detects architecture-related tasks.
+
+#### Example Use Cases
+
+```bash
+# Scaffold a new Python project with the full MASA directory structure
+/masa:scaffold python
+
+# Implement a new feature following the 5-layer protocol
+/masa:new-feature create JWT authentication system
+
+# Audit the services layer for dependency violations
+/masa:audit services
+
+# Check if the current file follows MASA rules
+/masa:validate
+
+# Refactor legacy code toward MASA compliance
+/masa:refactor
+
+# Learn about a specific rule with code examples
+/masa:explain data-dressing
+```
+
+### Claude Code (Standalone)
+
+If you prefer not to use the plugin, add the skill as project instructions:
 
 ```bash
 # Copy to your project
@@ -52,13 +100,6 @@ cp SKILL.md your-project/SKILL.md
 
 # Reference it in your CLAUDE.md or project instructions
 echo "Follow the architecture rules in SKILL.md" >> your-project/CLAUDE.md
-```
-
-Or load it directly in a conversation:
-
-```bash
-# In Claude Code CLI
-claude --project-instructions SKILL.md
 ```
 
 ### OpenAI Codex
@@ -87,7 +128,19 @@ Include the contents of SKILL.md in your agent's system prompt or project-level 
 
 ```
 masa-skill/
-├── SKILL.md                          # Main skill file (load this into your agent)
+├── .claude-plugin/
+│   └── plugin.json                   # Claude Code plugin manifest
+├── commands/                         # User-invocable slash commands (/masa:*)
+│   ├── new-feature.md
+│   ├── validate.md
+│   ├── audit.md
+│   ├── refactor.md
+│   ├── explain.md
+│   └── scaffold.md
+├── skills/
+│   └── masa-framework/
+│       └── SKILL.md                  # Auto-invoked skill (model-triggered)
+├── SKILL.md                          # Standalone skill file (for non-plugin agents)
 ├── references/
 │   ├── pillars.md                    # The Four Pillars — deep dive
 │   ├── rulesets.md                   # Five Agentic Rulesets with examples
@@ -105,25 +158,31 @@ masa-skill/
 
 | File | Purpose | When to Use |
 |------|---------|-------------|
-| **`SKILL.md`** | Core skill — all rules, commands, and validation logic | **Always load this** |
+| **`.claude-plugin/plugin.json`** | Plugin manifest for Claude Code | Plugin installation |
+| **`commands/*.md`** | Slash commands (`/masa:new-feature`, etc.) | User-invoked commands |
+| **`skills/masa-framework/SKILL.md`** | Auto-invoked skill — Claude uses it automatically | Architecture tasks |
+| **`SKILL.md`** | Standalone skill file for non-plugin agents | Copilot, Codex, etc. |
 | `references/pillars.md` | Detailed explanation of the four architectural pillars | Deep understanding |
 | `references/rulesets.md` | Five rulesets with code examples in Python, TS, Go | Implementing features |
 | `references/validation.md` | Violation catalog with detection patterns | Code review / auditing |
 | `references/task-execution-protocol.md` | Step-by-step workflow for implementing features | New feature development |
 | `references/languages/*.md` | Language-specific conventions and project layouts | Starting a new project |
 
-> **Minimum setup:** Just load `SKILL.md`. The references are supplementary — the agent will consult them when needed.
+> **Plugin users:** Just install the plugin — everything works automatically.
+> **Non-plugin users:** Load `SKILL.md` into your agent. The references are supplementary.
 
 ## Available Commands
 
-Once the skill is loaded, the agent responds to these commands:
+Once the plugin is installed (or skill is loaded), these commands are available:
 
 | Command | What It Does |
 |---------|-------------|
-| `/masa:new-feature` | Implement a feature following MASA layer rules |
-| `/masa:validate` | Check current code for architectural violations |
-| `/masa:audit` | Full audit of imports, naming, and layer compliance |
-| `/masa:refactor` | Refactor existing code toward MASA patterns |
+| `/masa:new-feature [description]` | Walk through the 5-step protocol for a new feature |
+| `/masa:validate` | Audit current code for MASA compliance |
+| `/masa:audit [layer]` | Full audit of a layer's imports, naming, and compliance |
+| `/masa:refactor` | Propose a MASA-compliant refactoring |
+| `/masa:explain [rule]` | Explain a ruleset with language-specific examples |
+| `/masa:scaffold [language]` | Generate the full MASA directory skeleton |
 
 ## The MASA Architecture at a Glance
 

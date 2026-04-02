@@ -1,0 +1,11 @@
+{
+  "name": "masa",
+  "description": "Teach your AI coding agent the MASA (Modular Agentic Semantic Architecture) framework — maximizes how well agents can understand, navigate, and safely modify your codebase.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Eduardo Machado Rezende"
+  },
+  "homepage": "https://www.masa-framework.org/",
+  "repository": "https://github.com/nicolasfmelo/masa-skill",
+  "license": "MIT"
+}
