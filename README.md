@@ -196,7 +196,7 @@ Once the plugin is installed (or skill is loaded), these commands are available:
 ├─────────────────────────────────────────────┤
 │  Integrations    DB repos, API clients      │
 ├─────────────────────────────────────────────┤
-│  Domain Models   Entities, value objects     │
+│  Domain Models   Entities, value objects    │
 └─────────────────────────────────────────────┘
 ```
 
